@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3ncwl31w4n5w"]
+
+[ext_resource type="Script" path="res://gun.gd" id="1_f8qfr"]
+[ext_resource type="Texture2D" uid="uid://b5aani7lbn87a" path="res://assets/sprites/gun.png" id="2_4w57m"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jpowy"]
+
+[sub_resource type="Curve" id="Curve_ykxnw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5uw4o"]
+curve = SubResource("Curve_ykxnw")
+
+[sub_resource type="Curve" id="Curve_v81kf"]
+max_value = 10.0
+_data = [Vector2(0.24, 0.659341), 0.0, 0.0, 0, 0, Vector2(0.733333, 1.53846), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qgdiv"]
+curve = SubResource("Curve_v81kf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_prnhl"]
+emission_shape_offset = Vector3(23.475, 0, 0)
+inherit_velocity_ratio = 1.0
+spread = 6.573
+initial_velocity_min = 314.61
+initial_velocity_max = 426.95
+gravity = Vector3(0, 300, 0)
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_qgdiv")
+color = Color(0, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_5uw4o")
+hue_variation_max = 0.09
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.2
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_f8qfr")
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_4w57m")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_jpowy")
+scale = Vector2(1.31705, 1.70664)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_prnhl")
+lifetime = 1.5
+
+[node name="GunBarrel" type="Node2D" parent="."]
+position = Vector2(35, 0)
