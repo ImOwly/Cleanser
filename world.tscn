@@ -34,7 +34,7 @@ sources/0 = SubResource("TileSetAtlasSource_g30p2")
 
 [node name="World" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_lalwq")]
+[node name="CharacterBody2D" parent="." groups=["Player"] instance=ExtResource("1_lalwq")]
 position = Vector2(323, 127)
 
 [node name="Gun" parent="CharacterBody2D" instance=ExtResource("2_gl08k")]
@@ -50,4 +50,4 @@ script = ExtResource("1_uv71u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(383, 226)
-zoom = Vector2(4, 4)
+zoom = Vector2(1.525, 1.525)
