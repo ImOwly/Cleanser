@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3ncwl31w4n5w"]
+
+[ext_resource type="Script" path="res://gun/gun_manager.gd" id="1_0ja70"]
+[ext_resource type="Texture2D" uid="uid://bywyxih72lqcx" path="res://assets/sprites/icon_spray.png" id="2_brdgu"]
+[ext_resource type="Texture2D" uid="uid://dyoxbro4ihw5m" path="res://assets/sprites/icon_shogun.png" id="3_evhge"]
+[ext_resource type="Texture2D" uid="uid://bl7f4uy0u2q6l" path="res://assets/sprites/icon_rifle.png" id="4_wbtk3"]
+
+[node name="Gun_Manager" type="Node2D"]
+z_index = 2
+script = ExtResource("1_0ja70")
+
+[node name="SprayButton" type="TextureButton" parent="."]
+offset_left = -9.0
+offset_top = -41.0
+offset_right = 9.0
+offset_bottom = -23.0
+texture_normal = ExtResource("2_brdgu")
+
+[node name="ShotgunButton" type="TextureButton" parent="."]
+offset_left = -38.0
+offset_top = -9.0
+offset_right = -20.0
+offset_bottom = 9.0
+texture_normal = ExtResource("3_evhge")
+
+[node name="RifleButton" type="TextureButton" parent="."]
+offset_left = 20.0
+offset_top = -9.0
+offset_right = 38.0
+offset_bottom = 9.0
+texture_normal = ExtResource("4_wbtk3")
+
+[connection signal="button_up" from="SprayButton" to="." method="_on_spray_button_button_up"]
+[connection signal="button_up" from="ShotgunButton" to="." method="_on_shotgun_button_button_up"]
+[connection signal="button_up" from="RifleButton" to="." method="_on_rifle_button_button_up"]

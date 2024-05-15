@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cfpwerc47e4vt" path="res://Player/player.tscn" id="1_lalwq"]
 [ext_resource type="Script" path="res://cursor/cursor.gd" id="1_uv71u"]
 [ext_resource type="Texture2D" uid="uid://c0eyp17xpr67q" path="res://assets/sprites/gamejamsprite.png" id="2_01frn"]
-[ext_resource type="PackedScene" uid="uid://b3ncwl31w4n5w" path="res://gun/gun.tscn" id="2_gl08k"]
+[ext_resource type="PackedScene" uid="uid://b3ncwl31w4n5w" path="res://gun/gun_manager.tscn" id="2_gl08k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g30p2"]
 texture = ExtResource("2_01frn")
@@ -185,7 +185,7 @@ sources/0 = SubResource("TileSetAtlasSource_g30p2")
 [node name="CharacterBody2D" parent="." groups=["Player"] instance=ExtResource("1_lalwq")]
 position = Vector2(323, 127)
 
-[node name="Gun" parent="CharacterBody2D" instance=ExtResource("2_gl08k")]
+[node name="GunManager" parent="CharacterBody2D" instance=ExtResource("2_gl08k")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_xu8kr")
@@ -198,4 +198,4 @@ script = ExtResource("1_uv71u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(383, 226)
-zoom = Vector2(1.525, 1.525)
+zoom = Vector2(3.405, 3.405)
