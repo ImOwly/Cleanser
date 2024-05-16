@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://7khmcrcy5ogv" path="res://assets/sprites/gun_spray.png" id="1_6hmsl"]
 
 [node name="Spraygun" type="Node2D"]
-z_index = 2
 
 [node name="GunSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_6hmsl")

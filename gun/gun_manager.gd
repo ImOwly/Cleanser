@@ -6,7 +6,7 @@ var bullet_speed = 500
 var fire_rate_spray = 0.1
 var fire_rate_shotgun = 0.5
 var fire_rate_rifle = 1
-
+@onready var tile_map = $TileMap
 # firing_angle_variation is the an angle in radians that the bullet is off by (divide by 2)
 # 45° ~ 0.785398
 # 90° ~ 1.5708
@@ -90,6 +90,8 @@ func fire_bullet(offset, velocity, bullet):
 	bullet_instance.position = current_gun.find_child("GunBarrel").get_global_position()
 	bullet_instance.rotation_degrees = current_gun.rotation_degrees
 	bullet_instance.apply_impulse(Vector2(velocity, 0).rotated(current_gun.rotation-offset))
+	#var bulletPos = bullet_instance.position.get_global_position
+	#print(bullet_instance.get_overlapping_bodies())
 	get_tree().get_root().add_child(bullet_instance)
 	
 func fire_delay(time):

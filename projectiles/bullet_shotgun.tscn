@@ -3,9 +3,8 @@
 [ext_resource type="Script" path="res://projectiles/bullet_shotgun.gd" id="1_haob4"]
 [ext_resource type="Texture2D" uid="uid://b6n62hncj3pqg" path="res://assets/sprites/bullet_shotgun.png" id="2_ivi8m"]
 
-[sub_resource type="CapsuleShape2D" id="1"]
-radius = 2.0
-height = 5.99999
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h25vs"]
+size = Vector2(2.00002, 3.99999)
 
 [node name="Bullet_Shotgun" type="RigidBody2D" groups=["Bullet"]]
 gravity_scale = 0.0
@@ -19,10 +18,12 @@ scale = Vector2(0.429846, 0.429846)
 texture = ExtResource("2_ivi8m")
 region_rect = Rect2(770, 800, 70, 100)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 z_index = 1
 rotation = 1.5708
-shape = SubResource("1")
 
-[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_h25vs")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
