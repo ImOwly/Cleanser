@@ -21,8 +21,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_310nj"]
 size = Vector2(10, 28)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-collision_layer = 0
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_e5lsu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

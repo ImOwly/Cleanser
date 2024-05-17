@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var GRAVITY: int = 900
 @export var JUMP_FORCE : int = 355
 
+@onready var spawnPoint = get_tree().get_root().get_child(0).find_child("SpawnPoint")
+
 func _physics_process(delta):
 	var direction = Input.get_axis("move_left" , "move_right")
 	if direction:
@@ -22,3 +24,6 @@ func _physics_process(delta):
 		velocity.y -= JUMP_FORCE
 		
 	move_and_slide()
+
+func hit():
+	self.position = spawnPoint.get_global_position()
