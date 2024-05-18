@@ -13,7 +13,7 @@ func _ready():
 	queue_free()
 	
 func _physics_process(delta):
-	if tile_map:
+	if tile_map != null:
 		var tilePos = tile_map.local_to_map(position)
 		var data = tile_map.get_cell_tile_data(0, tilePos)
 		var current_Atlas_Id = tile_map.get_cell_atlas_coords(0, tilePos)

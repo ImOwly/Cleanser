@@ -35,13 +35,9 @@ enum {
 
 var state = PASSIVE
 
-#var passive_tex = load("res://assets/sprites/enemy_passive.png")
-#var approach_tex = load("res://assets/sprites/enemy_approach.png") 
-#var attack_tex = load("res://assets/sprites/enemy_attacking.png") 
 
 func _ready():
 	player = get_parent().get_node("CharacterBody2D")
-	#sprite2D.texture = passive_tex
 	rng.randomize()
 	randomnum = rng.randf()
 
@@ -56,7 +52,6 @@ func _physics_process(delta):
 		var isRight = isFacingRight()
 		match state:
 			PASSIVE:
-				#sprite2D.texture = passive_tex
 				if !moving and !pause:
 					if(isRight):
 						animation_player.play("idle_right")
@@ -72,18 +67,14 @@ func _physics_process(delta):
 			APPROACH:
 				if(isRight):
 					animation_player.play("idle_right")
-					print("looking right")
 				else:
 					animation_player.play("idle_left")
-					print("looking left")
-				#sprite2D.texture = approach_tex
 				move(player.position, SPEED, true, delta)
 			ATTACK:
 				if(isRight):
 					animation_player.play("attack_right")
 				else:
 					animation_player.play("attack_left")
-				#sprite2D.texture = attack_tex
 				fire_delay(fire_rate)
 				attack()
 				await get_tree().create_timer(.1).timeout
@@ -100,7 +91,6 @@ func _physics_process(delta):
 					animation_player.play("idle_right")
 				else:
 					animation_player.play("idle_left")
-				#sprite2D.texture = approach_tex
 				move(player.position, SPEED, false, delta)
 				
 func move(target, speed, is_approach, delta):
