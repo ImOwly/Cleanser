@@ -22,6 +22,7 @@ var player
 var rng = RandomNumberGenerator.new()
 @onready var sprite2D = get_node("Sprite2D")
 @onready var bullet = preload("res://projectiles/bullet_enemy.tscn")
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var randomnum
 
@@ -34,13 +35,13 @@ enum {
 
 var state = PASSIVE
 
-var passive_tex = load("res://assets/sprites/enemy_passive.png")
-var approach_tex = load("res://assets/sprites/enemy_approach.png") 
-var attack_tex = load("res://assets/sprites/enemy_attacking.png") 
+#var passive_tex = load("res://assets/sprites/enemy_passive.png")
+#var approach_tex = load("res://assets/sprites/enemy_approach.png") 
+#var attack_tex = load("res://assets/sprites/enemy_attacking.png") 
 
 func _ready():
 	player = get_parent().get_node("CharacterBody2D")
-	sprite2D.texture = passive_tex
+	#sprite2D.texture = passive_tex
 	rng.randomize()
 	randomnum = rng.randf()
 
@@ -51,12 +52,16 @@ func _physics_process(delta):
 	
 	# Update state
 	update_state()
-	
 	if (can_fire):
+		var isRight = isFacingRight()
 		match state:
 			PASSIVE:
-				sprite2D.texture = passive_tex
+				#sprite2D.texture = passive_tex
 				if !moving and !pause:
+					if(isRight):
+						animation_player.play("idle_right")
+					else:
+						animation_player.play("idle_left")
 					var screenSize = get_viewport().get_visible_rect().size
 					rndX = min(rng.randi_range(0, DRIFT_DISTANCE),screenSize.x)
 					rndY = randomly_negative(DRIFT_DISTANCE - rndX)
@@ -65,10 +70,20 @@ func _physics_process(delta):
 				if !pause:
 					move(self.position + Vector2(rndX, rndY), SPEED, true, delta)
 			APPROACH:
-				sprite2D.texture = approach_tex
+				if(isRight):
+					animation_player.play("idle_right")
+					print("looking right")
+				else:
+					animation_player.play("idle_left")
+					print("looking left")
+				#sprite2D.texture = approach_tex
 				move(player.position, SPEED, true, delta)
 			ATTACK:
-				sprite2D.texture = attack_tex
+				if(isRight):
+					animation_player.play("attack_right")
+				else:
+					animation_player.play("attack_left")
+				#sprite2D.texture = attack_tex
 				fire_delay(fire_rate)
 				attack()
 				await get_tree().create_timer(.1).timeout
@@ -81,9 +96,13 @@ func _physics_process(delta):
 				attack()
 				await get_tree().create_timer(.1).timeout
 			DISTANCE:
-				sprite2D.texture = approach_tex
+				if(isRight):
+					animation_player.play("idle_right")
+				else:
+					animation_player.play("idle_left")
+				#sprite2D.texture = approach_tex
 				move(player.position, SPEED, false, delta)
-
+				
 func move(target, speed, is_approach, delta):
 	var direction = position.direction_to(target)
 	if not is_approach:
@@ -98,6 +117,12 @@ func moving_delay(move_time, pause_time):
 	await get_tree().create_timer(pause_time).timeout
 	pause = false
 	moving = false
+	
+func isFacingRight():
+	var direction = self.position - player.position
+	if direction.x < 0:
+		return true
+	return false 
 	
 func update_state():
 	var distance_to_target = position.distance_to(player.position)
