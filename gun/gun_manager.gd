@@ -106,8 +106,8 @@ func toggle_gun_menu():
 		$SprayButton.visible = false
 		$ShotgunButton.visible = false
 		$RifleButton.visible = false
-				
-func _on_spray_button_button_up():
+		
+func _on_spray_button_button_down():
 	selected_gun = Gun_Types.spraygun
 	current_gun.queue_free()
 	current_gun = spraygun.instantiate()
@@ -115,7 +115,7 @@ func _on_spray_button_button_up():
 	toggle_gun_menu()
 	can_fire = true
 
-func _on_shotgun_button_button_up():
+func _on_shotgun_button_button_down():
 	selected_gun = Gun_Types.shotgun
 	current_gun.queue_free()
 	current_gun = shotgun.instantiate()
@@ -123,7 +123,7 @@ func _on_shotgun_button_button_up():
 	toggle_gun_menu()
 	can_fire = true
 
-func _on_rifle_button_button_up():
+func _on_rifle_button_button_down():
 	selected_gun = Gun_Types.rifle
 	current_gun.queue_free()
 	current_gun = rifle.instantiate()

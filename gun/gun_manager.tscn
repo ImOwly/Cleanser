@@ -30,6 +30,9 @@ offset_right = 38.0
 offset_bottom = 9.0
 texture_normal = ExtResource("4_wbtk3")
 
+[connection signal="button_down" from="SprayButton" to="." method="_on_spray_button_button_down"]
 [connection signal="button_up" from="SprayButton" to="." method="_on_spray_button_button_up"]
+[connection signal="button_down" from="ShotgunButton" to="." method="_on_shotgun_button_button_down"]
 [connection signal="button_up" from="ShotgunButton" to="." method="_on_shotgun_button_button_up"]
+[connection signal="button_down" from="RifleButton" to="." method="_on_rifle_button_button_down"]
 [connection signal="button_up" from="RifleButton" to="." method="_on_rifle_button_button_up"]
