@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://e2fynuuobad6" path="res://assets/sprites/coin_shogun.png" id="11_xhmnq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t4oyg"]
-distance = -231.0
+distance = -754.8
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g30p2"]
 texture = ExtResource("2_01frn")
@@ -110,7 +110,7 @@ sources/0 = SubResource("TileSetAtlasSource_g30p2")
 [node name="World" type="Node2D"]
 
 [node name="HurtBox" type="Area2D" parent="."]
-position = Vector2(0, 500)
+position = Vector2(0, -0.399963)
 collision_layer = 255
 collision_mask = 255
 script = ExtResource("1_47axl")
@@ -136,7 +136,7 @@ script = ExtResource("1_uv71u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(383, 226)
-zoom = Vector2(2.34, 2.34)
+zoom = Vector2(2.5, 2.5)
 script = ExtResource("5_fc83x")
 
 [node name="CoinRifle" type="Area2D" parent="."]

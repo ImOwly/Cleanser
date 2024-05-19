@@ -148,8 +148,9 @@ func fire_bullet(offset, velocity, bullet):
 	var bullet_instance = bullet.instantiate()
 	bullet_instance.position = get_global_position()
 	bullet_instance.look_at(player.position)
-	bullet_instance.apply_impulse(Vector2(velocity, 0).rotated(bullet_instance.rotation-offset),player.position)
-	get_tree().get_root().add_child(bullet_instance)
+	var angle = get_angle_to(player.position)
+	bullet_instance.apply_impulse(Vector2(velocity, 0).rotated(angle),player.position)
+	get_parent().add_child(bullet_instance)
 	
 func fire_delay(time):
 	can_fire = false
