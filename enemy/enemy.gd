@@ -48,6 +48,7 @@ func _physics_process(delta):
 	
 	# Update state
 	update_state()
+		
 	if (can_fire):
 		var isRight = isFacingRight()
 		match state:

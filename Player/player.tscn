@@ -1,25 +1,53 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfpwerc47e4vt"]
+[gd_scene load_steps=10 format=3 uid="uid://cfpwerc47e4vt"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_e5lsu"]
 [ext_resource type="Texture2D" uid="uid://7qisrnfxhelk" path="res://assets/sprites/player.png" id="2_rau4p"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ym83n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyqvb"]
 atlas = ExtResource("2_rau4p")
 region = Rect2(0, 0, 16, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_m7u3l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3l78"]
+atlas = ExtResource("2_rau4p")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oe1s"]
+atlas = ExtResource("2_rau4p")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mli8n"]
+atlas = ExtResource("2_rau4p")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1ldw"]
+atlas = ExtResource("2_rau4p")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kj12n"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ym83n")
+"texture": SubResource("AtlasTexture_nyqvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3l78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oe1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mli8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1ldw")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"walk",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_310nj"]
-size = Vector2(10, 28)
+size = Vector2(10, 21)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
@@ -28,8 +56,11 @@ platform_floor_layers = 4294967041
 script = ExtResource("1_e5lsu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_m7u3l")
+sprite_frames = SubResource("SpriteFrames_kj12n")
+animation = &"walk"
+frame = 2
+frame_progress = 0.0474045
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_310nj")

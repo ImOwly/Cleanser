@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://blcqtmabrv50c" path="res://assets/sprites/bat2.png" id="2_gu8bd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28fgw"]
-size = Vector2(14, 14)
+size = Vector2(24, 14)
 
 [sub_resource type="Animation" id="Animation_271ll"]
 length = 0.001

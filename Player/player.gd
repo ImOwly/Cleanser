@@ -3,16 +3,25 @@ extends CharacterBody2D
 @export var SPEED: int = 155
 @export var GRAVITY: int = 900
 @export var JUMP_FORCE : int = 355
+@onready var animated_sprite_2d = $AnimatedSprite2D
 
 @onready var spawnPoint = get_tree().get_root().get_child(0).find_child("SpawnPoint")
 
 func _physics_process(delta):
 	var direction = Input.get_axis("move_left" , "move_right")
+	if direction == 1:
+		animated_sprite_2d.play("walk")
+		animated_sprite_2d.flip_h = false
+	elif direction == -1:
+		animated_sprite_2d.flip_h = true
+		animated_sprite_2d.play("walk")
+
 	if direction:
 		velocity.x = direction * SPEED
 	
 	#not moving scenario
 	else:
+		animated_sprite_2d.stop()
 		velocity.x = 0
 		
 	#gravity

@@ -134,8 +134,6 @@ func toggle_gun_menu():
 		$PistolButton.visible = false
 		
 func generate_menu():
-	print("generate_menu")
-	print(position)
 	for i in range(1, len(owned_guns)+1):
 		var start_rads = (TAU/2 * (i - 1)) / (len(owned_guns))
 		var end_rads = (TAU/2 * i) / (len(owned_guns))
@@ -143,7 +141,6 @@ func generate_menu():
 		var radious = 30
 		var offset = Vector2(-9,-9)
 		var icon_pos = radious * Vector2.from_angle(mid_rads) + offset
-		print(icon_pos)
 		match owned_guns[i-1]:
 			Gun_Types.spraygun:
 				$SprayButton.position = icon_pos

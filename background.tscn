@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://1cupuw7qtr6j"]
+
+[ext_resource type="Texture2D" uid="uid://df3kv3op1gr8o" path="res://assets/sprites/clouds.png" id="1_qjn4v"]
+[ext_resource type="Texture2D" uid="uid://cfg85gmaivg22" path="res://assets/sprites/mountain.png" id="2_638d6"]
+[ext_resource type="Texture2D" uid="uid://vodyu8qn0nk1" path="res://assets/sprites/trees.png" id="3_d6i1n"]
+
+[node name="Background" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(500, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/sky"]
+position = Vector2(-1.19209e-07, -1)
+scale = Vector2(1.002, 1.38)
+texture = ExtResource("1_qjn4v")
+centered = false
+
+[node name="mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(584, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/mountains"]
+texture_filter = 1
+position = Vector2(1, -480)
+scale = Vector2(2.16096, 1.81167)
+texture = ExtResource("2_638d6")
+centered = false
+
+[node name="trees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(584, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/trees"]
+position = Vector2(292, 176)
+texture = ExtResource("3_d6i1n")

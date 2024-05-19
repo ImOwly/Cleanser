@@ -1,0 +1,158 @@
+[gd_scene load_steps=12 format=3 uid="uid://b1s658ssi3vnv"]
+
+[ext_resource type="Script" path="res://goat.gd" id="1_5x5y1"]
+[ext_resource type="Texture2D" uid="uid://dsh6bw0gbsgcs" path="res://assets/sprites/goat.png" id="2_48cci"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6dy1"]
+size = Vector2(33, 19)
+
+[sub_resource type="Animation" id="Animation_1j7gw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1qept"]
+resource_name = "attackLeft"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_btesi"]
+resource_name = "attackRight"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [29, 28, 27, 26, 25]
+}
+
+[sub_resource type="Animation" id="Animation_uctlx"]
+resource_name = "idleLeft"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_4rkxm"]
+resource_name = "idleRight"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [19, 18, 17, 16, 15]
+}
+
+[sub_resource type="Animation" id="Animation_ynrmi"]
+resource_name = "prepareLeft"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_tyixv"]
+resource_name = "prepareRight"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 23, 22, 21, 20]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3pv41"]
+_data = {
+"RESET": SubResource("Animation_1j7gw"),
+"attackLeft": SubResource("Animation_1qept"),
+"attackRight": SubResource("Animation_btesi"),
+"idleLeft": SubResource("Animation_uctlx"),
+"idleRight": SubResource("Animation_4rkxm"),
+"prepareLeft": SubResource("Animation_ynrmi"),
+"prepareRight": SubResource("Animation_tyixv")
+}
+
+[node name="goat" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_5x5y1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 7)
+shape = SubResource("RectangleShape2D_a6dy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_48cci")
+hframes = 5
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3pv41")
+}
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(21, 0)
+collision_mask = 7
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(-20, 0)
+collision_mask = 7
