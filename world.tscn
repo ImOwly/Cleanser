@@ -139,14 +139,10 @@ position = Vector2(383, 226)
 zoom = Vector2(2.34, 2.34)
 script = ExtResource("5_fc83x")
 
-[node name="Enemy" parent="." instance=ExtResource("5_lctlo")]
-position = Vector2(770, 116)
-
-[node name="Enemy3" parent="." instance=ExtResource("5_lctlo")]
-position = Vector2(601, 42)
-
 [node name="CoinRifle" type="Area2D" parent="."]
-position = Vector2(100, 210)
+position = Vector2(2704, -615)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("8_q4wo8")
 
 [node name="Sprite2D" type="Sprite2D" parent="CoinRifle"]
@@ -156,7 +152,9 @@ texture = ExtResource("9_27c78")
 shape = SubResource("RectangleShape2D_5d0ci")
 
 [node name="CoinShotgun" type="Area2D" parent="."]
-position = Vector2(152, 209)
+position = Vector2(1239, 219)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("10_ty55n")
 
 [node name="Sprite2D" type="Sprite2D" parent="CoinShotgun"]
@@ -164,6 +162,42 @@ texture = ExtResource("11_xhmnq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CoinShotgun"]
 shape = SubResource("RectangleShape2D_5d0ci")
+
+[node name="Enemy" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(770, 116)
+
+[node name="Enemy2" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(1011, 74)
+
+[node name="Enemy3" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(601, 42)
+
+[node name="Enemy4" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(601, 42)
+
+[node name="Enemy5" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(1487, 51)
+
+[node name="Enemy6" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(2034, 188)
+
+[node name="Enemy7" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(2345, 45)
+
+[node name="Enemy8" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(2580, -70)
+
+[node name="Enemy9" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(2868, -262)
+
+[node name="Enemy10" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(2966, -607)
+
+[node name="Enemy11" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(3364, -377)
+
+[node name="Enemy12" parent="." instance=ExtResource("5_lctlo")]
+position = Vector2(3170, -598)
 
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]

@@ -7,6 +7,7 @@
 radius = 2.0
 
 [node name="Bullet_Enemy" type="RigidBody2D" groups=["Bullet"]]
+collision_layer = 2
 gravity_scale = 0.0
 can_sleep = false
 lock_rotation = true

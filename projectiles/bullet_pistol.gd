@@ -1,5 +1,5 @@
 extends RigidBody2D
-var lifetime = .5
+var lifetime = .4
 
 func _ready():
 	await get_tree().create_timer(lifetime).timeout
