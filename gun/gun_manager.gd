@@ -6,6 +6,7 @@ var bullet_speed = 500
 var fire_rate_spray = 0.1
 var fire_rate_shotgun = 0.5
 var fire_rate_rifle = 1
+var fire_rate_pistol = .9
 
 # firing_angle_variation is the an angle in radians that the bullet is off by (divide by 2)
 # 45° ~ 0.785398
@@ -14,17 +15,24 @@ var fire_rate_rifle = 1
 var firing_angle_variation = 0.10472
 var bullet_speed_variation = 100
 
-enum Gun_Types {shotgun, rifle, spraygun}
+enum Gun_Types {shotgun, rifle, spraygun, pistol}
 var selected_gun = Gun_Types.spraygun
 var current_gun
 var gen_gun = true
+var owned_guns = []
 
+# Bullets
 @onready var spray = preload("res://projectiles/spray.tscn")
 @onready var bullet_rifle = preload("res://projectiles/bullet_rifle.tscn")
 @onready var bullet_shotgun = preload("res://projectiles/bullet_shotgun.tscn")
-@onready var shotgun = preload("res://gun/shotgun.tscn")
-@onready var rifle = preload("res://gun/rifle.tscn")
+@onready var bullet_pistol = preload("res://projectiles/bullet_pistol.tscn")
+
+# Guns
 @onready var spraygun = preload("res://gun/spraygun.tscn")
+@onready var rifle = preload("res://gun/rifle.tscn")
+@onready var shotgun = preload("res://gun/shotgun.tscn")
+@onready var pistol = preload("res://gun/pistol.tscn")
+
 
 func _ready():
 	current_gun = spraygun.instantiate()
@@ -32,6 +40,9 @@ func _ready():
 	$SprayButton.visible = false
 	$ShotgunButton.visible = false
 	$RifleButton.visible = false
+	$PistolButton.visible = false
+	owned_guns.append(Gun_Types.spraygun)
+	owned_guns.append(Gun_Types.pistol)
 
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed):
@@ -52,6 +63,8 @@ func _process(delta):
 				fire_shotgun()
 			Gun_Types.rifle:
 				fire_rifle()
+			Gun_Types.pistol:
+				fire_pistol()
 	
 func generate_gun():
 	if gen_gun:
@@ -78,6 +91,10 @@ func fire_spray_gun():
 	fire_multiple_bullets(spray, 2)
 	fire_delay(fire_rate_spray)
 	
+func fire_pistol():
+	fire_bullet(0, bullet_speed/2, bullet_pistol)
+	fire_delay(fire_rate_pistol)
+	
 func fire_multiple_bullets(bullet, x):
 	for i in range(0, x):
 		var offset = rng.randf_range(-firing_angle_variation, firing_angle_variation)
@@ -98,14 +115,44 @@ func fire_delay(time):
 	can_fire = true
 
 func toggle_gun_menu():
-	if (!$SprayButton.visible or !$ShotgunButton.visible or !$RifleButton.visible):
-		$SprayButton.visible = true
-		$ShotgunButton.visible = true
-		$RifleButton.visible = true
+	generate_menu()
+	if (!$SprayButton.visible):
+		for gun in owned_guns:
+			match gun:
+				Gun_Types.spraygun:
+					$SprayButton.visible = true
+				Gun_Types.shotgun:
+					$ShotgunButton.visible = true
+				Gun_Types.rifle:
+					$RifleButton.visible = true
+				Gun_Types.pistol:
+					$PistolButton.visible = true
 	else:
 		$SprayButton.visible = false
 		$ShotgunButton.visible = false
 		$RifleButton.visible = false
+		$PistolButton.visible = false
+		
+func generate_menu():
+	print("generate_menu")
+	print(position)
+	for i in range(1, len(owned_guns)+1):
+		var start_rads = (TAU/2 * (i - 1)) / (len(owned_guns))
+		var end_rads = (TAU/2 * i) / (len(owned_guns))
+		var mid_rads = (start_rads + end_rads) / 2.0 * -1
+		var radious = 30
+		var offset = Vector2(-9,-9)
+		var icon_pos = radious * Vector2.from_angle(mid_rads) + offset
+		print(icon_pos)
+		match owned_guns[i-1]:
+			Gun_Types.spraygun:
+				$SprayButton.position = icon_pos
+			Gun_Types.shotgun:
+				$ShotgunButton.position = icon_pos
+			Gun_Types.rifle:
+				$RifleButton.position = icon_pos
+			Gun_Types.pistol:
+				$PistolButton.position = icon_pos
 		
 func _on_spray_button_button_down():
 	selected_gun = Gun_Types.spraygun
@@ -130,3 +177,19 @@ func _on_rifle_button_button_down():
 	get_tree().get_root().add_child(current_gun)
 	toggle_gun_menu()
 	can_fire = true
+
+func _on_pistol_button_button_down():
+	selected_gun = Gun_Types.pistol
+	current_gun.queue_free()
+	current_gun = pistol.instantiate()
+	get_tree().get_root().add_child(current_gun)
+	toggle_gun_menu()
+	can_fire = true
+	
+func unlock_rifle():
+	if !owned_guns.has(Gun_Types.rifle):
+		owned_guns.append(Gun_Types.rifle)
+	
+func unlock_shotgun():
+	if !owned_guns.has(Gun_Types.shotgun):
+		owned_guns.append(Gun_Types.shotgun)

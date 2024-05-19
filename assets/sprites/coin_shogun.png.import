@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c30caxxwbdwxo"
-path="res://.godot/imported/bullet_o.png-d098f3ac5e7dc9d455f248f6952227c4.ctex"
+uid="uid://e2fynuuobad6"
+path="res://.godot/imported/coin_shogun.png-0cc4226b797280d2066e89b75e3b7570.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/bullet_o.png"
-dest_files=["res://.godot/imported/bullet_o.png-d098f3ac5e7dc9d455f248f6952227c4.ctex"]
+source_file="res://assets/sprites/coin_shogun.png"
+dest_files=["res://.godot/imported/coin_shogun.png-0cc4226b797280d2066e89b75e3b7570.ctex"]
 
 [params]
 

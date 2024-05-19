@@ -1,23 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkd3rg5ojiclt"]
+[gd_scene load_steps=4 format=3 uid="uid://dvto33suqr8sx"]
 
-[ext_resource type="Script" path="res://projectiles/bullet_rifle.gd" id="1_kibva"]
-[ext_resource type="Texture2D" uid="uid://bwfvewdluftx7" path="res://assets/sprites/bullet_rifle.png" id="2_gw3ex"]
+[ext_resource type="Script" path="res://projectiles/bullet_pistol.gd" id="1_vocku"]
+[ext_resource type="Texture2D" uid="uid://fgbnf6jwdhp" path="res://assets/sprites/bullet_pistol.png" id="2_jn0fe"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 2.0
-height = 12.0
+height = 6.0
 
-[node name="Bullet_Rifle" type="RigidBody2D" groups=["Bullet"]]
+[node name="Bullet_Pistol" type="RigidBody2D" groups=["Bullet"]]
 gravity_scale = 0.0
 lock_rotation = true
 max_contacts_reported = 1
 contact_monitor = true
 linear_velocity = Vector2(19, 0)
-script = ExtResource("1_kibva")
+script = ExtResource("1_vocku")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.429846, 0.429846)
-texture = ExtResource("2_gw3ex")
+texture = ExtResource("2_jn0fe")
 region_rect = Rect2(770, 800, 70, 100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

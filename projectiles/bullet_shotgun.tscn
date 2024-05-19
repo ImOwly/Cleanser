@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b6n62hncj3pqg" path="res://assets/sprites/bullet_shotgun.png" id="2_ivi8m"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
-radius = 2.0
-height = 5.99999
+radius = 1.0
+height = 4.0
 
 [node name="Bullet_Shotgun" type="RigidBody2D" groups=["Bullet"]]
 gravity_scale = 0.0

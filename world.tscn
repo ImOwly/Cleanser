@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://k3lfl6o1swtq"]
+[gd_scene load_steps=16 format=3 uid="uid://k3lfl6o1swtq"]
 
 [ext_resource type="Script" path="res://hurt_box/hurt_box.gd" id="1_47axl"]
 [ext_resource type="PackedScene" uid="uid://cfpwerc47e4vt" path="res://Player/player.tscn" id="1_lalwq"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://b3ncwl31w4n5w" path="res://gun/gun_manager.tscn" id="2_gl08k"]
 [ext_resource type="Script" path="res://camera/camera.gd" id="5_fc83x"]
 [ext_resource type="PackedScene" uid="uid://h8vayy28b48s" path="res://enemy/enemy.tscn" id="5_lctlo"]
+[ext_resource type="Script" path="res://coins/coin_rifle.gd" id="8_q4wo8"]
+[ext_resource type="Texture2D" uid="uid://bgeqlcok67qlg" path="res://assets/sprites/coin_rifle.png" id="9_27c78"]
+[ext_resource type="Script" path="res://coins/coin_shotgun.gd" id="10_ty55n"]
+[ext_resource type="Texture2D" uid="uid://e2fynuuobad6" path="res://assets/sprites/coin_shogun.png" id="11_xhmnq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t4oyg"]
 distance = -231.0
@@ -101,6 +105,8 @@ texture = ExtResource("2_01frn")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_g30p2")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5d0ci"]
+
 [node name="World" type="Node2D"]
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -113,6 +119,7 @@ script = ExtResource("1_47axl")
 shape = SubResource("WorldBoundaryShape2D_t4oyg")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_lalwq")]
+position = Vector2(3, 124)
 
 [node name="GunManager" parent="CharacterBody2D" instance=ExtResource("2_gl08k")]
 
@@ -138,5 +145,27 @@ position = Vector2(770, 116)
 [node name="Enemy3" parent="." instance=ExtResource("5_lctlo")]
 position = Vector2(601, 42)
 
+[node name="CoinRifle" type="Area2D" parent="."]
+position = Vector2(100, 210)
+script = ExtResource("8_q4wo8")
+
+[node name="Sprite2D" type="Sprite2D" parent="CoinRifle"]
+texture = ExtResource("9_27c78")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinRifle"]
+shape = SubResource("RectangleShape2D_5d0ci")
+
+[node name="CoinShotgun" type="Area2D" parent="."]
+position = Vector2(152, 209)
+script = ExtResource("10_ty55n")
+
+[node name="Sprite2D" type="Sprite2D" parent="CoinShotgun"]
+texture = ExtResource("11_xhmnq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinShotgun"]
+shape = SubResource("RectangleShape2D_5d0ci")
+
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]
+[connection signal="body_entered" from="CoinRifle" to="CoinRifle" method="_on_body_entered"]
+[connection signal="body_entered" from="CoinShotgun" to="CoinShotgun" method="_on_body_entered"]
