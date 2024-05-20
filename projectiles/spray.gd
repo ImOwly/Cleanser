@@ -110,4 +110,11 @@ func _physics_process(delta):
 				Vector2i(24,14):
 					var atlasCord : Vector2i = Vector2i(17, 14)
 					tile_map.set_cell(0, tilePos, 0, atlasCord)
+				Vector2i(10,9):
+					var atlasCord : Vector2i = Vector2i(8, 9)
+					tile_map.set_cell(0, tilePos, 0, atlasCord)
+				Vector2i(10,8):
+					var atlasCord : Vector2i = Vector2i(8, 8)
+					tile_map.set_cell(0, tilePos, 0, atlasCord)
+				
 				

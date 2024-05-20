@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cut7qy54cw2ou"]
+[gd_scene load_steps=3 format=3 uid="uid://cut7qy54cw2ou"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_pspc0"]
+[ext_resource type="Texture2D" uid="uid://oprhs62nd6w7" path="res://assets/sprites/gameover.png" id="2_2dl1k"]
 
 [node name="GameOver" type="CanvasLayer"]
 script = ExtResource("1_pspc0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576.406, 324.5)
+scale = Vector2(0.288203, 0.16225)
+texture = ExtResource("2_2dl1k")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(635, 396)
+scale = Vector2(0.661, 0.508125)
+texture = ExtResource("2_2dl1k")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

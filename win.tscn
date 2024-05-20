@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ktx8wpegkax3"]
+[gd_scene load_steps=5 format=3 uid="uid://ktx8wpegkax3"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_pspc0"]
+[ext_resource type="Texture2D" uid="uid://dooqgw7n05t11" path="res://assets/sprites/win.png" id="2_qhvrl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tgiqc"]
 font_size = 69
@@ -10,6 +11,11 @@ font_size = 32
 
 [node name="Win" type="CanvasLayer"]
 script = ExtResource("1_pspc0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(915.5, 340)
+scale = Vector2(2.455, 1.3495)
+texture = ExtResource("2_qhvrl")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

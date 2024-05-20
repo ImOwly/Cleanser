@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var progress_bar = find_child("ProgressBar")
 
 var total_num_corrupted_tiles
-var corrupted_tiles = [Vector2i(0,1), Vector2i(1,1), Vector2i(2,1), Vector2i(3,1), Vector2i(4,1), Vector2i(5,4), Vector2i(8,4)]
+var corrupted_tiles = [Vector2i(0,1), Vector2i(1,1), Vector2i(2,1), Vector2i(3,1), Vector2i(4,1), Vector2i(5,4), Vector2i(8,4), Vector2i(10,9), Vector2i(10,8), Vector2i(24,7), Vector2i(24,14), Vector2i(24, 2), Vector2i(13,7), Vector2i(12,7), Vector2i(11,7), Vector2i(3,7), Vector2i(4,7), Vector2i(5,7), Vector2i(3,8), Vector2i(5,8), Vector2i(3,9), Vector2i(4,9), Vector2i(5,9), Vector2i(4,11), Vector2i(6,11), Vector2i(5,12), Vector2i(4,13), Vector2i(6,13), Vector2i(13,1), Vector2i(14,1), Vector2i(15,1)]
 
 func _ready():
 	total_num_corrupted_tiles = count_corrupted_tiles()
