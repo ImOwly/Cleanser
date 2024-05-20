@@ -161,3 +161,13 @@ collision_mask = 7
 position = Vector2(0, 16)
 target_position = Vector2(0, -22)
 collision_mask = 7
+
+[node name="RayCastEdgeLeft" type="RayCast2D" parent="."]
+position = Vector2(-15, 5)
+target_position = Vector2(0, 24)
+collision_mask = 7
+
+[node name="RayCastEdgeRight" type="RayCast2D" parent="."]
+position = Vector2(17, 5)
+target_position = Vector2(0, 24)
+collision_mask = 7

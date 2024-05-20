@@ -7,9 +7,12 @@ var isAttacking = false
 var isStunned = false
 var attack_time = .5
 var stun_time = 1
+var can_turn = true
 @onready var ray_cast_left = $RayCastLeft
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_up = $RayCastUp
+@onready var ray_cast_edge_left = $RayCastEdgeLeft
+@onready var ray_cast_edge_right = $RayCastEdgeRight
 @onready var animation_player = $AnimationPlayer
 @onready var player = get_parent().get_node("CharacterBody2D")
 @export var GRAVITY: int = 100
@@ -75,12 +78,17 @@ func stun_delay(time):
 	await get_tree().create_timer(time).timeout
 	isStunned = false
 	
+func turn_delay(time):
+	can_turn = false
+	await get_tree().create_timer(time).timeout
+	can_turn = true
+	
 func _process(delta):
 	
 	update_State()
 	
 	velocity.x = direction * SPEED
-	if not is_on_floor():
+	if !is_on_floor():
 		velocity.y += GRAVITY * delta
 	var isLeft = isFacingLeft()
 	match state:
@@ -95,20 +103,25 @@ func _process(delta):
 				if !collision or !collision.is_in_group("Bullet"):
 					direction = 1
 					animation_player.play("idleRight")
-			if ray_cast_right.is_colliding():
+			elif ray_cast_right.is_colliding():
 				var collision = ray_cast_right.get_collider()
 				if !collision or !collision.is_in_group("Bullet"):
 					direction = -1
 					animation_player.play("idleLeft")
+			elif is_on_floor() and (!ray_cast_edge_left.is_colliding() or !ray_cast_edge_right.is_colliding()) and can_turn:
+				turn_delay(1)
+				direction = -direction
 			
 			if isFacingLeft() and ray_cast_right.is_colliding():
 					var collision = ray_cast_right.get_collider()
 					if collision.is_in_group("Player"):
-						direction = -direction
+						collision.hit()
+						return
 			if !isFacingLeft() and ray_cast_left.is_colliding():
 					var collision = ray_cast_left.get_collider()
 					if collision.is_in_group("Player"):
-						direction = -direction
+						collision.hit()
+						return
 			if ray_cast_up.is_colliding():
 					var collision = ray_cast_up.get_collider()
 					if collision.is_in_group("Player"):
@@ -130,7 +143,6 @@ func _process(delta):
 				if ray_cast_left.is_colliding():
 					var collision = ray_cast_left.get_collider()
 					if collision.is_in_group("Map"):
-						print("MAP")
 						isStunned = true
 						stun_delay(stun_time)
 						isAttacking = false
@@ -143,7 +155,6 @@ func _process(delta):
 				if ray_cast_right.is_colliding():
 					var collision = ray_cast_right.get_collider()
 					if collision.is_in_group("Map"):
-						print("MAP")
 						isStunned = true
 						stun_delay(stun_time)
 						isAttacking = false
