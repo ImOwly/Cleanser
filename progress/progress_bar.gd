@@ -19,6 +19,9 @@ func _process(delta):
 		var progress = (total_num_corrupted_tiles - num_corrupted_tiles) / total_num_corrupted_tiles * 100
 		progress_bar.value = progress
 		
+	if progress_bar.value >= 100:
+		get_tree().change_scene_to_file("res://win.tscn")
+		
 func count_corrupted_tiles():
 	var count = float()
 	var tile_list = tile_map.get_used_cells(0)
