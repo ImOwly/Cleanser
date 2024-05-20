@@ -109,7 +109,7 @@ func _process(delta):
 					direction = -1
 					animation_player.play("idleLeft")
 			elif is_on_floor() and (!ray_cast_edge_left.is_colliding() or !ray_cast_edge_right.is_colliding()) and can_turn:
-				turn_delay(.1)
+				turn_delay(.2)
 				direction = -direction
 			
 			if isFacingLeft() and ray_cast_right.is_colliding():
