@@ -33,7 +33,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 func hit():
-	get_tree().change_scene_to_file("res://game_over.tscn")
+	pass
+	#get_tree().change_scene_to_file("res://game_over.tscn")
 
 func unlock_rifle():
 	self.find_child("GunManager").unlock_rifle()
