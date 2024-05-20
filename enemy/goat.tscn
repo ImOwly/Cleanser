@@ -156,3 +156,8 @@ collision_mask = 7
 position = Vector2(0, 5)
 target_position = Vector2(-20, 0)
 collision_mask = 7
+
+[node name="RayCastUp" type="RayCast2D" parent="."]
+position = Vector2(0, 16)
+target_position = Vector2(0, -22)
+collision_mask = 7

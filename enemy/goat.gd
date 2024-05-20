@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
-const SPEED = 60
-const BUFFER = 10
-const ATTACK_DISTANCE = 120
-var collisionCount = 0
+const SPEED = 100
+const ATTACK_DISTANCE = 170
 var maxCollision = 6
-var alreadyAttacked = false
+var isAttacking = false
+var isStunned = false
+var attack_time = .5
+var stun_time = 1
 @onready var ray_cast_left = $RayCastLeft
 @onready var ray_cast_right = $RayCastRight
+@onready var ray_cast_up = $RayCastUp
 @onready var animation_player = $AnimationPlayer
 @onready var player = get_parent().get_node("CharacterBody2D")
 @export var GRAVITY: int = 100
@@ -15,18 +17,16 @@ var alreadyAttacked = false
 enum {
 	PASSIVE,
 	ATTACK,
+	STUNNED
 }
 var state = PASSIVE
 var direction = 1
 var rng = RandomNumberGenerator.new()
-var randomNum = 1
-
 
 func _ready():
 	rng.randomize()
-	randomNum = rng.randf()
 	
-func isFacingRight():
+func isFacingLeft():
 	if direction < 0:
 		return true
 	return false
@@ -41,20 +41,21 @@ func line_of_sight(player):
 
 func update_State():
 	var distance_to_target = position.distance_to(player.position)
-	if !line_of_sight(player):
-		state = PASSIVE
-	elif distance_to_target > (ATTACK_DISTANCE + BUFFER):
-
-		state = PASSIVE
-	elif distance_to_target < (ATTACK_DISTANCE - BUFFER):
-		if alreadyAttacked == true:
-			await get_tree().create_timer(3.0).timeout
-		state = ATTACK
-		alreadyAttacked = false
-	else:
-		await get_tree().create_timer(3.0).timeout
-		state = ATTACK
-		alreadyAttacked = false
+	var x_distance = position.x - player.position.x
+	var y_distance = position.y - player.position.y
+	if !isAttacking:
+		if isStunned:
+			state = STUNNED
+		elif !line_of_sight(player):
+			state = PASSIVE
+		elif distance_to_target > (ATTACK_DISTANCE):
+			state = PASSIVE
+		elif distance_to_target < (ATTACK_DISTANCE):
+			if ((isFacingLeft() and x_distance > 0) or (!isFacingLeft() and x_distance < 0)) and abs(y_distance) < 14:
+				state = ATTACK
+				attack_delay(attack_time)
+			else:
+				state = PASSIVE
 	
 func randomly_negative(x):
 	if (rng.randi_range(0, 1) == 0):
@@ -64,54 +65,91 @@ func randomly_negative(x):
 func hit():
 	queue_free()
 	
+func attack_delay(time):
+	isAttacking = true
+	await get_tree().create_timer(time).timeout
+	isAttacking = false
+	
+func stun_delay(time):
+	isStunned = true
+	await get_tree().create_timer(time).timeout
+	isStunned = false
+	
 func _process(delta):
-	collisionCount=0
+	
 	update_State()
 	
 	velocity.x = direction * SPEED
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
-	var isRight = isFacingRight()
+	var isLeft = isFacingLeft()
 	match state:
 		PASSIVE:
-			if isRight:
+			if isLeft:
 				animation_player.play("idleLeft")
-			elif !isRight:
+			elif !isLeft:
 				animation_player.play("idleRight")
 			
 			if ray_cast_left.is_colliding():
-				direction = 1
-				animation_player.play("idleRight")
+				var collision = ray_cast_right.get_collider()
+				if !collision or !collision.is_in_group("Bullet"):
+					direction = 1
+					animation_player.play("idleRight")
 			if ray_cast_right.is_colliding():
-				direction = -1
-				animation_player.play("idleLeft")
+				var collision = ray_cast_right.get_collider()
+				if !collision or !collision.is_in_group("Bullet"):
+					direction = -1
+					animation_player.play("idleLeft")
+			
+			if isFacingLeft() and ray_cast_right.is_colliding():
+					var collision = ray_cast_right.get_collider()
+					if collision.is_in_group("Player"):
+						direction = -direction
+			if !isFacingLeft() and ray_cast_left.is_colliding():
+					var collision = ray_cast_left.get_collider()
+					if collision.is_in_group("Player"):
+						direction = -direction
+			if ray_cast_up.is_colliding():
+					var collision = ray_cast_up.get_collider()
+					if collision.is_in_group("Player"):
+						collision.hit()
+						return
 			
 			velocity.x += direction * SPEED * delta
 			move_and_slide()
 		ATTACK:
 			velocity.x = 0
-			if(isRight):
+			if(isLeft):
 				animation_player.play("prepareRight")
 			else:
 				animation_player.play("prepareLeft")
 			
-			if(isRight):
+			if(isLeft):
 				animation_player.play("attackLeft")
 				velocity.x = -1 * SPEED	* 8
-				alreadyAttacked = true
 				if ray_cast_left.is_colliding():
 					var collision = ray_cast_left.get_collider()
+					if collision.is_in_group("Map"):
+						print("MAP")
+						isStunned = true
+						stun_delay(stun_time)
+						isAttacking = false
 					if collision.is_in_group("Player"):
 						collision.hit()
 						return
 			else:
 				animation_player.play("attackRight")
 				velocity.x = 1 * SPEED	* 8
-				alreadyAttacked = true
 				if ray_cast_right.is_colliding():
 					var collision = ray_cast_right.get_collider()
+					if collision.is_in_group("Map"):
+						print("MAP")
+						isStunned = true
+						stun_delay(stun_time)
+						isAttacking = false
 					if collision.is_in_group("Player"):
 						collision.hit()
 						return
-				
 			move_and_slide()
+		STUNNED:
+			print("STUNNED")
