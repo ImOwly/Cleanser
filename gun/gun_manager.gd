@@ -7,6 +7,7 @@ var fire_rate_spray = 0.1
 var fire_rate_shotgun = 0.5
 var fire_rate_rifle = 1
 var fire_rate_pistol = .9
+var MOUSE = InputEventMouseButton.new()
 
 # firing_angle_variation is the an angle in radians that the bullet is off by (divide by 2)
 # 45° ~ 0.785398
@@ -166,6 +167,7 @@ func generate_menu():
 		
 func _on_spray_button_button_down():
 	can_fire = false
+	unclick()
 	selected_gun = Gun_Types.spraygun
 	current_gun.queue_free()
 	current_gun = spraygun.instantiate()
@@ -175,6 +177,7 @@ func _on_spray_button_button_down():
 
 func _on_shotgun_button_button_down():
 	can_fire = false
+	unclick()
 	selected_gun = Gun_Types.shotgun
 	current_gun.queue_free()
 	current_gun = shotgun.instantiate()
@@ -184,6 +187,7 @@ func _on_shotgun_button_button_down():
 
 func _on_rifle_button_button_down():
 	can_fire = false
+	unclick()
 	selected_gun = Gun_Types.rifle
 	current_gun.queue_free()
 	current_gun = rifle.instantiate()
@@ -193,12 +197,18 @@ func _on_rifle_button_button_down():
 
 func _on_pistol_button_button_down():
 	can_fire = false
+	unclick()
 	selected_gun = Gun_Types.pistol
 	current_gun.queue_free()
 	current_gun = pistol.instantiate()
 	add_child(current_gun)
 	toggle_gun_menu()
 	can_fire = true
+	
+func unclick():
+	MOUSE.set_button_index(1)
+	MOUSE.set_pressed(false)
+	Input.parse_input_event(MOUSE)
 	
 func unlock_rifle():
 	if !owned_guns.has(Gun_Types.rifle):

@@ -163,4 +163,4 @@ func _process(delta):
 						return
 			move_and_slide()
 		STUNNED:
-			print("STUNNED")
+			pass
