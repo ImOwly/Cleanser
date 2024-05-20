@@ -51,7 +51,7 @@ func _input(event):
 
 func _process(delta):
 	generate_gun()
-	current_gun.position = Vector2(0,0)
+	current_gun.position = Vector2(3,8)
 	current_gun.look_at(get_global_mouse_position())
 	
 	#When left-mouse is held down
@@ -105,7 +105,7 @@ func fire_multiple_bullets(bullet, x):
 func fire_bullet(offset, velocity, bullet):
 	var bullet_instance = bullet.instantiate()
 	#bullet_instance.position = current_gun.find_child("GunBarrel").get_global_position()
-	var barrel_local_position = current_gun.find_child("GunBarrel").get_global_position() - current_gun.get_global_position()
+	var barrel_local_position = current_gun.find_child("GunBarrel").get_global_position() - self.get_global_position()
 	bullet_instance.position = barrel_local_position
 	bullet_instance.rotation_degrees = current_gun.rotation_degrees
 	bullet_instance.apply_impulse(Vector2(velocity, 0).rotated(current_gun.rotation-offset))

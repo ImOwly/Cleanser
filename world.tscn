@@ -44,15 +44,15 @@ texture = ExtResource("2_01frn")
 0:2/0 = 0
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -0.875, 8, 4.875, -2.5, 4.125, -8, 1.875, -8, -2.875, 0.375, -0.875)
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0.25, 8, 4.875, -2.5, 4.125, -8, 1.875, -8, -2.875, 0.875, 0)
 1:2/0 = 0
 1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:2/0/physics_layer_0/angular_velocity = 0.0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.125, 8, -0.125, 8, -0.75, 8, 4.625, -8, 4.625)
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.125, 8, 0.375, 8, 4.625, -8, 4.625)
 2:2/0 = 0
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, 0.125, -1, 5, -3, 8, -4.5, 8, 1.25, 0.5, 4.25, -8, 4.375)
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.25, -0.25, 0.125, 5, -3, 8, -4.5, 8, 1.25, 0.5, 4.25, -8, 4.375)
 3:0/0 = 0
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
@@ -109,6 +109,21 @@ sources/0 = SubResource("TileSetAtlasSource_g30p2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5d0ci"]
 
+[sub_resource type="Animation" id="Animation_gtau0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_7mdw8"]
 resource_name = "move_left"
 length = 0.9
@@ -141,7 +156,14 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_gtau0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_052s4"]
+_data = {
+"RESET": SubResource("Animation_gtau0"),
+"move_left": SubResource("Animation_7mdw8"),
+"move_right": SubResource("Animation_1m8jl")
+}
+
+[sub_resource type="Animation" id="Animation_nd7i8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -154,29 +176,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_052s4"]
-_data = {
-"RESET": SubResource("Animation_gtau0"),
-"move_left": SubResource("Animation_7mdw8"),
-"move_right": SubResource("Animation_1m8jl")
-}
-
-[sub_resource type="Animation" id="Animation_rb52s"]
-resource_name = "move_right"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
 [sub_resource type="Animation" id="Animation_gpty6"]
@@ -195,8 +194,9 @@ tracks/0/keys = {
 "values": [8, 7, 6, 5, 4, 3, 2, 1, 0]
 }
 
-[sub_resource type="Animation" id="Animation_nd7i8"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_rb52s"]
+resource_name = "move_right"
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -204,10 +204,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_knlrf"]
