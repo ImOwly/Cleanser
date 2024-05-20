@@ -9,22 +9,17 @@
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0, 0)
-motion_mirroring = Vector2(500, 0)
+motion_mirroring = Vector2(1000, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/sky"]
-position = Vector2(-1.19209e-07, -1)
-scale = Vector2(1.002, 1.38)
+position = Vector2(501, -409)
 texture = ExtResource("1_qjn4v")
-centered = false
 
 [node name="mountains" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(584, 0)
+motion_mirroring = Vector2(1168, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/mountains"]
 texture_filter = 1
-position = Vector2(1, -480)
-scale = Vector2(2.16096, 1.81167)
 texture = ExtResource("2_638d6")
 centered = false
 
@@ -32,5 +27,6 @@ centered = false
 motion_mirroring = Vector2(584, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/trees"]
-position = Vector2(292, 176)
+position = Vector2(0, -41)
 texture = ExtResource("3_d6i1n")
+centered = false
