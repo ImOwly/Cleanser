@@ -1,14 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://emyv885gf63i"]
+[gd_scene load_steps=3 format=3 uid="uid://dsu2ufmuc6oww"]
 
 [ext_resource type="Theme" uid="uid://badxynejpdm83" path="res://progress/progress_bar_theme.tres" id="1_2j8rl"]
+[ext_resource type="Script" path="res://progress/progress_bar.gd" id="1_vjwfn"]
 
-[node name="ProgressBar" type="Node2D"]
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_vjwfn")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 offset_left = -295.0
-offset_top = 1.0
 offset_right = 295.0
-offset_bottom = 29.0
+offset_bottom = 28.0
+grow_horizontal = 2
 theme = ExtResource("1_2j8rl")
 step = 1.0
 value = 57.0

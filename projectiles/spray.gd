@@ -1,10 +1,10 @@
 extends RigidBody2D
-var lifetime = 0.7
+var lifetime = 0.36
 @onready var tile_map = get_tree().get_root().get_node("World").get_node("TileMap")
 var colors = [Color(0.0, 255.0, 255.0, 1.0), 
-			Color("06c3dd", 1.0), 
-			Color("24909f", 1.0),
-			Color("5e23dc", 1.0)]
+			Color("539fdd", 1.0),
+			Color("30afbf", 1.0),
+			Color("a6f3fc", 1.0)]
 
 func _ready():
 	randomize()

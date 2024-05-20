@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 @onready var tile_map = get_tree().get_root().get_child(0).find_child("TileMap")
 @onready var player = get_tree().get_root().get_child(0).find_child("CharacterBody2D")
@@ -11,13 +11,13 @@ func _ready():
 	total_num_corrupted_tiles = count_corrupted_tiles()
 	
 func _process(delta):
-	if player:
-		self.position = player.global_position - Vector2(0, 120)
-		
 	if tile_map:
 		var num_corrupted_tiles = count_corrupted_tiles()
 		var progress = (total_num_corrupted_tiles - num_corrupted_tiles) / total_num_corrupted_tiles * 100
 		progress_bar.value = progress
+		
+	if progress_bar.value >= 100:
+		get_tree().change_scene_to_file("res://win.tscn")
 		
 func count_corrupted_tiles():
 	var count = float()
