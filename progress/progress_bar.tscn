@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://emyv885gf63i"]
+
+[ext_resource type="Theme" uid="uid://badxynejpdm83" path="res://progress/progress_bar_theme.tres" id="1_2j8rl"]
+
+[node name="ProgressBar" type="Node2D"]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -295.0
+offset_top = 1.0
+offset_right = 295.0
+offset_bottom = 29.0
+theme = ExtResource("1_2j8rl")
+step = 1.0
+value = 57.0

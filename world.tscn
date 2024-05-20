@@ -1,10 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://k3lfl6o1swtq"]
+[gd_scene load_steps=28 format=3 uid="uid://k3lfl6o1swtq"]
 
 [ext_resource type="Script" path="res://hurt_box/hurt_box.gd" id="1_47axl"]
-[ext_resource type="PackedScene" uid="uid://1cupuw7qtr6j" path="res://background.tscn" id="1_h47xn"]
+[ext_resource type="PackedScene" path="res://background.tscn" id="1_h47xn"]
+[ext_resource type="PackedScene" uid="uid://emyv885gf63i" path="res://progress/progress_bar.tscn" id="1_itayj"]
 [ext_resource type="PackedScene" uid="uid://cfpwerc47e4vt" path="res://Player/player.tscn" id="1_lalwq"]
 [ext_resource type="Script" path="res://cursor/cursor.gd" id="1_uv71u"]
 [ext_resource type="Texture2D" uid="uid://c0eyp17xpr67q" path="res://assets/sprites/gamejamsprite.png" id="2_01frn"]
+[ext_resource type="Script" path="res://progress/progress_bar.gd" id="2_cjrnq"]
 [ext_resource type="PackedScene" uid="uid://b3ncwl31w4n5w" path="res://gun/gun_manager.tscn" id="2_gl08k"]
 [ext_resource type="Script" path="res://camera/camera.gd" id="5_fc83x"]
 [ext_resource type="PackedScene" uid="uid://h8vayy28b48s" path="res://enemy/enemy.tscn" id="5_lctlo"]
@@ -12,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bgeqlcok67qlg" path="res://assets/sprites/coin_rifle.png" id="9_27c78"]
 [ext_resource type="Script" path="res://coins/coin_shotgun.gd" id="10_ty55n"]
 [ext_resource type="Texture2D" uid="uid://e2fynuuobad6" path="res://assets/sprites/coin_shogun.png" id="11_xhmnq"]
-[ext_resource type="PackedScene" uid="uid://b1s658ssi3vnv" path="res://enemy/goat.tscn" id="12_5o2vg"]
+[ext_resource type="PackedScene" path="res://enemy/goat.tscn" id="12_5o2vg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t4oyg"]
 distance = -754.8
@@ -109,6 +111,21 @@ sources/0 = SubResource("TileSetAtlasSource_g30p2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5d0ci"]
 
+[sub_resource type="Animation" id="Animation_gtau0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_7mdw8"]
 resource_name = "move_left"
 length = 0.9
@@ -141,7 +158,14 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_gtau0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_052s4"]
+_data = {
+"RESET": SubResource("Animation_gtau0"),
+"move_left": SubResource("Animation_7mdw8"),
+"move_right": SubResource("Animation_1m8jl")
+}
+
+[sub_resource type="Animation" id="Animation_nd7i8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -154,29 +178,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_052s4"]
-_data = {
-"RESET": SubResource("Animation_gtau0"),
-"move_left": SubResource("Animation_7mdw8"),
-"move_right": SubResource("Animation_1m8jl")
-}
-
-[sub_resource type="Animation" id="Animation_rb52s"]
-resource_name = "move_right"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
 [sub_resource type="Animation" id="Animation_gpty6"]
@@ -195,8 +196,9 @@ tracks/0/keys = {
 "values": [8, 7, 6, 5, 4, 3, 2, 1, 0]
 }
 
-[sub_resource type="Animation" id="Animation_nd7i8"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_rb52s"]
+resource_name = "move_right"
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -204,10 +206,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_knlrf"]
@@ -220,6 +222,11 @@ _data = {
 [node name="World" type="Node2D"]
 
 [node name="Background" parent="." instance=ExtResource("1_h47xn")]
+
+[node name="ProgressBar" parent="." instance=ExtResource("1_itayj")]
+z_index = 3
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_cjrnq")
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -0.399963)
