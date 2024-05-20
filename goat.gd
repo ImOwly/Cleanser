@@ -63,15 +63,11 @@ func randomly_negative(x):
 	
 func hit():
 	queue_free()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 func _process(delta):
-	#gravity
 	collisionCount=0
 	update_State()
 	
-		
-			
-		
 	velocity.x = direction * SPEED
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -104,7 +100,6 @@ func _process(delta):
 				velocity.x = -1 * SPEED	* 8
 				alreadyAttacked = true
 				if ray_cast_left.is_colliding():
-					print("collision detected")
 					get_tree().change_scene_to_file("res://game_over.tscn")
 				
 			else:
@@ -112,7 +107,6 @@ func _process(delta):
 				velocity.x = 1 * SPEED	* 8
 				alreadyAttacked = true
 				if ray_cast_right.is_colliding():
-					print("collision detected")
 					get_tree().change_scene_to_file("res://game_over.tscn")
 				
 			move_and_slide()
