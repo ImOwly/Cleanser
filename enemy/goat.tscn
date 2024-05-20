@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b1s658ssi3vnv"]
 
-[ext_resource type="Script" path="res://goat.gd" id="1_5x5y1"]
+[ext_resource type="Script" path="res://enemy/goat.gd" id="1_5x5y1"]
 [ext_resource type="Texture2D" uid="uid://dsh6bw0gbsgcs" path="res://assets/sprites/goat.png" id="2_48cci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6dy1"]

@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bgeqlcok67qlg" path="res://assets/sprites/coin_rifle.png" id="9_27c78"]
 [ext_resource type="Script" path="res://coins/coin_shotgun.gd" id="10_ty55n"]
 [ext_resource type="Texture2D" uid="uid://e2fynuuobad6" path="res://assets/sprites/coin_shogun.png" id="11_xhmnq"]
-[ext_resource type="PackedScene" path="res://enemy/goat.tscn" id="12_5o2vg"]
+[ext_resource type="PackedScene" uid="uid://b1s658ssi3vnv" path="res://enemy/goat.tscn" id="12_5o2vg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t4oyg"]
 distance = -754.8
