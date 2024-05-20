@@ -16,13 +16,7 @@ func _process(delta):
 		
 	if tile_map:
 		var num_corrupted_tiles = count_corrupted_tiles()
-		print("#######################")
-		print(total_num_corrupted_tiles)
-		print(num_corrupted_tiles)
-		print(total_num_corrupted_tiles - num_corrupted_tiles)
-		print((total_num_corrupted_tiles - num_corrupted_tiles) / total_num_corrupted_tiles)
-		var progress = (total_num_corrupted_tiles - num_corrupted_tiles) / total_num_corrupted_tiles *100
-		print(progress)
+		var progress = (total_num_corrupted_tiles - num_corrupted_tiles) / total_num_corrupted_tiles * 100
 		progress_bar.value = progress
 		
 func count_corrupted_tiles():
