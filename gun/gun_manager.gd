@@ -20,6 +20,7 @@ var selected_gun = Gun_Types.spraygun
 var current_gun
 var gen_gun = true
 var owned_guns = []
+var flip_sprite
 
 # Bullets
 @onready var spray = preload("res://projectiles/spray.tscn")
@@ -50,9 +51,17 @@ func _input(event):
 			toggle_gun_menu()
 
 func _process(delta):
+	
 	generate_gun()
 	current_gun.position = Vector2(3,8)
 	current_gun.look_at(get_global_mouse_position())
+	
+	if (get_global_mouse_position().x < global_position.x):
+		current_gun.find_child("GunSprite").flip_v = true
+		flip_sprite = true
+	else:
+		current_gun.find_child("GunSprite").flip_v = false
+		flip_sprite = false
 	
 	#When left-mouse is held down
 	if Input.is_mouse_button_pressed(1) and can_fire:
@@ -101,15 +110,17 @@ func fire_multiple_bullets(bullet, x):
 		var velocity = bullet_speed + rng.randf_range(-bullet_speed_variation, bullet_speed_variation)
 		velocity = abs(velocity)
 		fire_bullet(offset, velocity, bullet)
-	
+
 func fire_bullet(offset, velocity, bullet):
 	var bullet_instance = bullet.instantiate()
-	#bullet_instance.position = current_gun.find_child("GunBarrel").get_global_position()
 	var barrel_local_position = current_gun.find_child("GunBarrel").get_global_position() - self.get_global_position()
+	if flip_sprite:
+		barrel_local_position = current_gun.find_child("GunBarrelFlipped").get_global_position() - self.get_global_position()
 	bullet_instance.position = barrel_local_position
 	bullet_instance.rotation_degrees = current_gun.rotation_degrees
 	bullet_instance.apply_impulse(Vector2(velocity, 0).rotated(current_gun.rotation-offset))
 	add_child(bullet_instance)
+	queue_redraw()
 	
 func fire_delay(time):
 	can_fire = false

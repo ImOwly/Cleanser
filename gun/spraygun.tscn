@@ -9,3 +9,6 @@ texture = ExtResource("1_6hmsl")
 
 [node name="GunBarrel" type="Node2D" parent="."]
 position = Vector2(8, -5)
+
+[node name="GunBarrelFlipped" type="Node2D" parent="."]
+position = Vector2(8, 5)
