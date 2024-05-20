@@ -100,17 +100,18 @@ func _process(delta):
 				velocity.x = -1 * SPEED	* 8
 				alreadyAttacked = true
 				if ray_cast_left.is_colliding():
-					get_tree().change_scene_to_file("res://game_over.tscn")
-				
+					var collision = ray_cast_left.get_collider()
+					if collision.is_in_group("Player"):
+						collision.hit()
+						return
 			else:
 				animation_player.play("attackRight")
 				velocity.x = 1 * SPEED	* 8
 				alreadyAttacked = true
 				if ray_cast_right.is_colliding():
-					get_tree().change_scene_to_file("res://game_over.tscn")
+					var collision = ray_cast_right.get_collider()
+					if collision.is_in_group("Player"):
+						collision.hit()
+						return
 				
 			move_and_slide()
-			
-	
-	
-
