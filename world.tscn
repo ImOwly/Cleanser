@@ -1,12 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://k3lfl6o1swtq"]
+[gd_scene load_steps=27 format=3 uid="uid://k3lfl6o1swtq"]
 
 [ext_resource type="Script" path="res://hurt_box/hurt_box.gd" id="1_47axl"]
 [ext_resource type="PackedScene" path="res://background.tscn" id="1_h47xn"]
-[ext_resource type="PackedScene" uid="uid://emyv885gf63i" path="res://progress/progress_bar.tscn" id="1_itayj"]
+[ext_resource type="PackedScene" uid="uid://dsu2ufmuc6oww" path="res://progress/progress_bar.tscn" id="1_itayj"]
 [ext_resource type="PackedScene" uid="uid://cfpwerc47e4vt" path="res://Player/player.tscn" id="1_lalwq"]
 [ext_resource type="Script" path="res://cursor/cursor.gd" id="1_uv71u"]
 [ext_resource type="Texture2D" uid="uid://c0eyp17xpr67q" path="res://assets/sprites/gamejamsprite.png" id="2_01frn"]
-[ext_resource type="Script" path="res://progress/progress_bar.gd" id="2_cjrnq"]
 [ext_resource type="PackedScene" uid="uid://b3ncwl31w4n5w" path="res://gun/gun_manager.tscn" id="2_gl08k"]
 [ext_resource type="Script" path="res://camera/camera.gd" id="5_fc83x"]
 [ext_resource type="PackedScene" uid="uid://h8vayy28b48s" path="res://enemy/enemy.tscn" id="5_lctlo"]
@@ -223,11 +222,6 @@ _data = {
 
 [node name="Background" parent="." instance=ExtResource("1_h47xn")]
 
-[node name="ProgressBar" parent="." instance=ExtResource("1_itayj")]
-z_index = 3
-scale = Vector2(0.5, 0.5)
-script = ExtResource("2_cjrnq")
-
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -0.399963)
 collision_layer = 255
@@ -344,6 +338,8 @@ position = Vector2(3199, -331)
 
 [node name="goat5" parent="." instance=ExtResource("12_5o2vg")]
 position = Vector2(3078, -258)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_itayj")]
 
 [connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="HurtBox" method="_on_body_entered"]
